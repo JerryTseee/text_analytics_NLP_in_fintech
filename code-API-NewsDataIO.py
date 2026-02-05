@@ -7,9 +7,10 @@ import requests
 import json                     # For pretty printing.
 
 # Read API key from file or paste as text string, for example:
-# API_KEY = 'paste_here'
-with open('../code-API-key-newsdataio.txt', 'r') as f: 
-    API_KEY = f.read().strip()
+API_KEY = 'pub_3292db9aea7e492e8b797baa8b380d18' # go to newsdata.io to get a free key yourself
+# or
+# with open('../code-API-key-newsdataio.txt', 'r') as f: 
+#     API_KEY = f.read().strip()
 
 # Retrieve the latest news.
 response = \
@@ -24,7 +25,7 @@ print(
         indent=4,
         sort_keys=True))
 
-# Retrieve the latest news about Apple (stock ticker: AAPL).
+# Retrieve the latest news about Apple company (stock ticker: AAPL).
 stock = 'AAPL'
 response = \
     requests.get(
@@ -33,6 +34,7 @@ response = \
          f'&q={stock}'
          '&category=business'
          '&language=en'))
+
 # Print everything. But on the free tier, many fields are empty or
 # filled with placeholders.
 print(
@@ -40,6 +42,7 @@ print(
         response.json(),
         indent=4,
         sort_keys=True))
+
 # Print only a few selected fields.
 for article in response.json()['results']:
     print(f"Title: {article['title']}")
